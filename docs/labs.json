@@ -17,10 +17,10 @@
   {
     "week": "week-02",
     "title": "Modern JavaScript Learning Dashboard",
-    "status": "ready",
+    "status": "submitted",
     "originalRepoUrl": "https://github.com/Mongkol88/engse203-lab02-68543210039-2",
     "originalCommit": "a31ec75e6932d05db315afba2db7a4760dc3ce72",
-    "pullRequestUrl": "",
+    "pullRequestUrl": "https://github.com/Mongkol88/engse203-student-labs-68543210039/pull/3",
     "submissionTag": "lab-02-submission-v1",
     "testStatus": "pass",
     "notes": "นำ Vite build output ที่มี index.html เข้า publish/",
