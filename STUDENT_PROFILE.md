@@ -3,10 +3,10 @@
 | รายการ | ข้อมูล |
 |---|---|
 | รายวิชา | ENGSE203 การเขียนโปรแกรมสำหรับวิศวกรซอฟต์แวร์ |
-| รหัสนักศึกษา | STUDENT-ID |
-| ชื่อ-นามสกุล | ชื่อ-นามสกุล |
-| Section | SEC-X |
-| GitHub Username | GITHUB-USERNAME |
-| Repository | `engse203-student-labs-STUDENT-ID` |
+| รหัสนักศึกษา | 68543210039 |
+| ชื่อ-นามสกุล | มงคล อาษากิจ |
+| Section | SEC-1 |
+| GitHub Username | GITHUB-Mongkol88 |
+| Repository | `engse203-student-labs-68543210039` |
 
 > ไฟล์นี้จะถูกปรับข้อมูลเมื่อรัน `npm run setup`
