@@ -6,7 +6,7 @@
 | รหัสนักศึกษา | 68543210039 |
 | ชื่อ-นามสกุล | มงคล อาษากิจ |
 | Section | SEC-1 |
-| GitHub Username | GITHUB-Mongkol88 |
+| GitHub Username | Mongkol88 |
 | Repository | `engse203-student-labs-68543210039` |
 
 > ไฟล์นี้จะถูกปรับข้อมูลเมื่อรัน `npm run setup`
