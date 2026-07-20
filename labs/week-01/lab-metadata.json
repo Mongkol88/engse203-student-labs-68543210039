@@ -1,11 +1,11 @@
 {
   "week": "week-01",
   "title": "Developer Environment & GitHub Repository Setup",
-  "status": "draft",
-  "originalRepoUrl": "",
-  "originalCommit": "",
+  "status": "ready",
+  "originalRepoUrl": "https://github.com/Mongkol88/engse203-lab01-68543210039",
+  "originalCommit": "9f8cf3dce1a18bf10d336220988761e1bd01c0e6",
   "pullRequestUrl": "",
-  "submissionTag": "",
-  "testStatus": "not-tested",
+  "submissionTag": "lab-01-submission-v1",
+  "testStatus": "pass",
   "notes": "LAB 1 ใช้ evidence report ได้โดยไม่ต้องมี web application"
 }
