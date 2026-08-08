@@ -62,9 +62,13 @@ npm run preview
 
 ## Screenshots
 
-- Desktop: `evidence/desktop.png`
-- Mobile 375px: `evidence/mobile-375.png`
-- Validation/empty state: TODO
+- Desktop:
+<img width="1919" height="881" alt="image" src="https://github.com/user-attachments/assets/1d5374c5-3902-4071-aa54-ea39ca5bdb83" />
+
+- Mobile 375px:
+<img width="817" height="856" alt="image" src="https://github.com/user-attachments/assets/daf0dd55-71ae-4e66-88b1-563a43ed2283" />
+
+- Validation/empty state: [validation](https://github.com/user-attachments/assets/dbc563d9-b22a-4f74-81e3-da430ef71b45), [empty-state](https://github.com/user-attachments/assets/94ea1f15-7411-4c4b-b845-83ed4a92535f)
 
 ## Week 03 → Week 04 Reflection
 
