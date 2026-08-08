@@ -10,7 +10,7 @@
 
 - Repository: [engse203-student-labs-68543210039](https://github.com/Mongkol88/engse203-student-labs-68543210039/tree/main)
 - Pull Request: [PR](https://github.com/Mongkol88/engse203-student-labs-68543210039/pull/5)
-- GitHub Pages: [GitHub Pages](https://github.com/Mongkol88/engse203-student-labs-68543210039/pull/5)
+- GitHub Pages: [GitHub Pages](https://mongkol88.github.io/engse203-student-labs-68543210039/)
 
 ## Component Tree
 

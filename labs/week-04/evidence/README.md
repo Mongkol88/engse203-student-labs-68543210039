@@ -13,5 +13,5 @@
 <img width="1098" height="816" alt="image" src="https://github.com/user-attachments/assets/94ea1f15-7411-4c4b-b845-83ed4a92535f" />
 
 - `pages-incognito.png`
-
+<img width="1919" height="974" alt="image" src="https://github.com/user-attachments/assets/babeaa04-98a0-4143-a110-d08f7d5dc6b7" />
 
