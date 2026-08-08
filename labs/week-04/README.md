@@ -54,7 +54,7 @@ npm run preview
 | TC-05 Filter | แสดงเฉพาะคำร้องตามสถานะที่เลือก | Pass | [ผลลัพธ์ รอดำเนินการ](https://github.com/user-attachments/assets/c614939e-880f-4291-bd2b-4565037d54f1), [ผลลัพธ์ กำลังดำเนินการ](https://github.com/user-attachments/assets/51cf1699-922f-46db-8bdd-613426f4977f), [ผลลัพธ์ เสร็จสิน](https://github.com/user-attachments/assets/e3961ae2-6cc7-44e9-9fc6-710c539123b3) |
 | TC-06 All | แสดงทุกคำร้องเมื่อเลือก all | Pass | [กดเพิ่อดูหลักฐาน](https://github.com/user-attachments/assets/1922f00d-587a-4bb3-903b-36df5c741747) |
 | TC-07 Empty | แสดงข้อความ empty state เมื่อไม่มีรายการ | Pass | [กดเพิ่อดูหลักฐาน](https://github.com/user-attachments/assets/209363e4-f953-4a15-8586-ec299ba47464) |
-| TC-08 Delete | 	ลบถูก id; summary/list เปลี่ยน| Pass | [กดเพิ่อดูหลักฐาน](https://github.com/user-attachments/assets/2dacd7c3-0b00-40cb-81ad-095c617d65aa) |
+| TC-08 Delete | ลบถูก id; summary/list เปลี่ยน| Pass | [กดเพิ่อดูหลักฐาน](https://github.com/user-attachments/assets/2dacd7c3-0b00-40cb-81ad-095c617d65aa) |
 | TC-09 Mobile | responsive 375px และไม่มี horizontal scroll | Pass | [กดเพิ่อดูหลักฐาน](https://github.com/user-attachments/assets/e2154d30-3cd2-41a0-ba48-f201ec5f9bd6) |
 | TC-10 Keyboard | focus/label/error/feedback ใช้งานได้ | Pass | [focus ชื่อผู้เเจ้ง](https://github.com/user-attachments/assets/6e14e21e-d47d-492b-b227-14e5c52eca5b), [focus ประเภทคำร้อง](https://github.com/user-attachments/assets/7e9462fa-fde0-4523-8c2d-2d5a021edf2d), [focus สถานที่](https://github.com/user-attachments/assets/c5137393-752f-4348-ac4c-18e3e2165b98), [focus รายละเอียด](https://github.com/user-attachments/assets/d012742e-bf41-4749-9724-44a3b14e9e43), [focus ความเร่งด่วน](https://github.com/user-attachments/assets/ea8eaa0f-6a53-4d89-b06a-28508143773f), [submit keyboard](https://github.com/user-attachments/assets/af5945f6-44b2-4be7-ba01-bd8dabd915d0), [focus filter](https://github.com/user-attachments/assets/25a905ee-15a1-4ce1-bc39-e70a48a8d7b7) |
 | TC-11 Build | npm run build และ preview ผ่าน | Pass | [npm run build](https://github.com/user-attachments/assets/44e61201-a1e6-4dca-b994-0d2f34ec490a), [npm run preview](https://github.com/user-attachments/assets/c07992d5-249f-40cf-83d6-eca654d474f1) |
@@ -72,5 +72,4 @@ npm run preview
 
 ## AI / External Resource Disclosure
 
-ระบุเครื่องมือหรือแหล่งที่ใช้, prompt/คำถามสำคัญ, ส่วนที่นำมาปรับ และวิธีที่ตรวจสอบความถูกต้อง หากไม่ได้ใช้ให้เขียนว่า “ไม่ได้ใช้”
-
+AI ที่ใช้ antigravity เเละ vscode copilot agent ใช้ในหาข้อมูลเกี่ยวกับ  react เช่น state, event เเละใช้เเก้ปัญหาในการ Input เเล้วข้อมูลไม่ถูกส่ง
