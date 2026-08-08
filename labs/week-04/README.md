@@ -9,8 +9,8 @@
 ## URLs
 
 - Repository: [engse203-student-labs-68543210039](https://github.com/Mongkol88/engse203-student-labs-68543210039/tree/main)
-- Pull Request: TODO
-- GitHub Pages: TODO
+- Pull Request: [PR](https://github.com/Mongkol88/engse203-student-labs-68543210039/pull/5)
+- GitHub Pages: [GitHub Pages](https://github.com/Mongkol88/engse203-student-labs-68543210039/pull/5)
 
 ## Component Tree
 
