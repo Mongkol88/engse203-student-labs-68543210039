@@ -4,29 +4,53 @@ import RequestForm from './components/RequestForm.jsx';
 import FilterBar from './components/FilterBar.jsx';
 import RequestList from './components/RequestList.jsx';
 import { initialRequests } from './data/initialRequests.js';
+import { useState } from 'react';
+
+const emptyForm = {
+  requesterName: '',
+  requestType: '',
+  location: '',
+  details: '',
+  priority: 'normal',
+};
 
 function App() {
-  // TODO LAB4-R04: เปลี่ยน requests/statusFilter เป็น state
-  const requests = initialRequests;
-  const statusFilter = 'all';
+  const [requests, setRequests] = useState(initialRequests);
+  const [statusFilter, setStatusFilter] = useState('all');
+  const [formData, setFormData] = useState(emptyForm);
 
-  // TODO LAB4-R04: คำนวณ summary เป็น derived data
-  const summary = {
-    total: requests.length,
-    pending: 0,
-    inProgress: 0,
-    completed: 0,
-  };
+  const summary = requests.reduce(
+    (accumulator, request) => {
+      accumulator.total += 1;
+      if (request.status === 'pending') accumulator.pending += 1;
+      if (request.status === 'in-progress') accumulator.inProgress += 1;
+      if (request.status === 'completed') accumulator.completed += 1;
+      return accumulator;
+    },
+    { total: 0, pending: 0, inProgress: 0, completed: 0 }
+  );
 
-  // TODO LAB4-R08: คำนวณ filteredRequests จาก requests + statusFilter
-  const filteredRequests = requests;
+  const filteredRequests = requests.filter((request) => {
+    if (statusFilter === 'all') return true;
+    if (statusFilter === 'pending') return request.status === 'pending';
+    if (statusFilter === 'in-progress') return request.status === 'in-progress';
+    return request.status === 'completed';
+  });
 
   function handleAddRequest(requestData) {
-    console.log('TODO add request', requestData);
+    const nextId = `REQ-${String(requests.length + 1).padStart(3, '0')}`;
+    const newRequest = {
+      ...requestData,
+      id: nextId,
+      status: 'pending',
+    };
+
+    setRequests((currentRequests) => [newRequest, ...currentRequests]);
+    setFormData({ ...emptyForm });
   }
 
   function handleDeleteRequest(requestId) {
-    console.log('TODO delete request', requestId);
+    setRequests((currentRequests) => currentRequests.filter((request) => request.id !== requestId));
   }
 
   return (
@@ -38,11 +62,15 @@ function App() {
       <main className="container page-content">
         <SummaryPanel summary={summary} />
         <div className="workspace-grid">
-          <RequestForm onAddRequest={handleAddRequest} />
+          <RequestForm
+            formData={formData}
+            onFormChange={setFormData}
+            onAddRequest={handleAddRequest}
+          />
           <section className="panel" aria-labelledby="request-list-title">
             <div className="section-heading">
               <h2 id="request-list-title">รายการคำร้อง</h2>
-              <FilterBar value={statusFilter} onFilterChange={() => {}} />
+              <FilterBar value={statusFilter} onFilterChange={setStatusFilter} />
             </div>
             <RequestList
               requests={filteredRequests}
