@@ -2,10 +2,10 @@
 
 | Tool / Resource | Purpose | Used portion | How I verified | My final decision |
 |---|---|---|---|---|
-| TODO หรือ `ไม่ได้ใช้` | TODO | TODO | source review / runtime test / ไม่เกี่ยวข้อง | TODO |
+| vs-code-copilot | ใช้สำหรับเช็ค syntax,ดูวิธีการใช้เเต่ละคำสั่ง เเละใช้ตรวจสอบความถูกต้องของโค้ด  | ไฟล์ DashboardPage.jsx‎, NewRequestPage.jsx‎, requestService.js เเละ requestStorage.js | เช็คโดยการใช้คำสั่ง npm run check ว่าไม่ออกนอกขอบเขตของงานใช้ไหมเเละตรวจโค้ดเเละทดสอบด้วยตนเอง | Good |
 
 คำรับรอง:
 
-- [ ] ไม่ส่ง token, password, secret หรือข้อมูลส่วนบุคคลจริงให้เครื่องมือ
-- [ ] ตรวจ source และรัน test ด้วยตนเอง
-- [ ] อธิบาย Route, Effect, Service Layer และ persistence ของ final code ได้
+- [x] ไม่ส่ง token, password, secret หรือข้อมูลส่วนบุคคลจริงให้เครื่องมือ
+- [x] ตรวจ source และรัน test ด้วยตนเอง
+- [x] อธิบาย Route, Effect, Service Layer และ persistence ของ final code ได้
