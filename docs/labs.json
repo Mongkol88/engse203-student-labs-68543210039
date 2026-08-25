@@ -58,5 +58,20 @@
     "sourceUrl": "https://github.com/Mongkol88/engse203-student-labs-68543210039/tree/lab/week-04/labs/week-04/source",
     "hasPublish": true,
     "sourceEntries": 11
+  },
+  {
+    "week": "week-05",
+    "title": "React Routing, Data Fetching & Front-end Mini App",
+    "status": "submitted",
+    "originalRepoUrl": "https://github.com/Mongkol88/engse203-student-labs-68543210039/tree/lab/week-05",
+    "originalCommit": "16349def4c18b27a3d27abda17573eb53ddf1a1a",
+    "pullRequestUrl": "https://github.com/Mongkol88/engse203-student-labs-68543210039/pull/6",
+    "submissionTag": "lab-05-submission-v1",
+    "testStatus": "pass",
+    "notes": "Static site ต้องมี index.html ที่ publish root",
+    "pageUrl": "https://Mongkol88.github.io/engse203-student-labs-68543210039/labs/week-05/",
+    "sourceUrl": "https://github.com/Mongkol88/engse203-student-labs-68543210039/tree/lab/week-05/labs/week-05/source",
+    "hasPublish": true,
+    "sourceEntries": 12
   }
 ]
