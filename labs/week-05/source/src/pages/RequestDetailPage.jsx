@@ -17,6 +17,9 @@ function RequestDetailPage() {
     setLoadState('loading');
     setErrorMessage('');
 
+    setLoadState('loading');
+    setErrorMessage('');
+
     getRequestById(requestId)
       .then((result) => {
         setRequest(result);
