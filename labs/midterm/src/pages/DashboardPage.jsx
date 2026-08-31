@@ -15,15 +15,15 @@ function DashboardPage() {
   const [loadState, setLoadState] = useState('idle');
   const [requests, setRequests] = useState([]);
   const [statusFilter, setStatusFilter] = useState('all');
-  
+
   // TODO B2: เพิ่ม state สำหรับข้อความค้นหา ที่นี่
   const [search, setSearch] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [notice, setNotice] = useState('');
 
   useEffect(() => {
-    let ignore = false; 
-    
+    let ignore = false;
+
     setLoadState('loading');
     setErrorMessage('');
     setNotice('');
@@ -55,17 +55,30 @@ function DashboardPage() {
   }), [requests]);
 
   const filteredRequests = useMemo(() => {
-    const query = search.trim().toLowerCase();
+    const queryTokens = search
+      .trim()
+      .toLowerCase()
+      .split(/\s+/)
+      .filter(Boolean);
 
     return requests.filter((request) => {
-      const matchStatus = statusFilter === 'all' || request.status === statusFilter;
-      
-      const matchSearch =
-        query === '' ||
-        request.requesterName?.toLowerCase().includes(query) ||
-        request.details?.toLowerCase().includes(query);
-      
-      return matchStatus && matchSearch;
+      const matchStatusFilter = statusFilter === 'all' || request.status === statusFilter;
+
+      if (queryTokens.length === 0) {
+        return matchStatusFilter;
+      }
+
+      const requester = request.requesterName?.toLowerCase() || '';
+      const details = request.details?.toLowerCase() || '';
+      const location = request.location?.toLowerCase() || '';
+      const status = request.status?.toLowerCase() || '';
+      const requestType = request.requestType?.toLowerCase() || '';
+
+      const fullText = `${requester} ${details} ${location} ${status} ${requestType}`;
+
+      const matchSearchTokens = queryTokens.every((token) => fullText.includes(token));
+
+      return matchStatusFilter && matchSearchTokens;
     });
   }, [requests, statusFilter, search]);
 
