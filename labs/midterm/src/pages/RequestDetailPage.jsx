@@ -13,20 +13,22 @@ function RequestDetailPage() {
   const [reloadKey, reload] = useManualReload();
 
   useEffect(() => {
-    let ignore = false;
     setLoadState('loading');
-    getRequestById(requestId).then((result) => {
-      if (ignore) return;
-      setRequest(result);
-      setLoadState('success');
-    }).catch((error) => {
-      if (ignore) return;
-      setErrorMessage(error instanceof Error ? error.message : 'โหลดรายละเอียดไม่สำเร็จ');
-      setLoadState('error');
-    });
-    return () => { ignore = true; };
-  }, [reloadKey]);
+    setErrorMessage('');
 
+    setLoadState('loading');
+    setErrorMessage('');
+
+    getRequestById(requestId)
+      .then((result) => {
+        setRequest(result);
+        setLoadState('success');
+      })
+      .catch((error) => {
+        setErrorMessage(error instanceof Error ? error.message : 'โหลดรายละเอียดไม่สำเร็จ');
+        setLoadState('error');
+      });
+  }, [requestId, reloadKey]);
   return (
     <section data-testid="page-request-detail">
       <div className="page-heading"><div><p className="eyebrow dark">DYNAMIC ROUTE</p><h1>รายละเอียดคำร้อง</h1><p>Request ID: <code>{requestId}</code></p></div></div>

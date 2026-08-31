@@ -20,39 +20,38 @@ function DashboardPage() {
   const [notice, setNotice] = useState('');
 
   useEffect(() => {
-    let ignore = false;
     setLoadState('loading');
     setErrorMessage('');
     setNotice('');
 
-    getRequests({
-      scenario,
-      onRecovery: (message) => { if (!ignore) setNotice(message); },
-    }).then((data) => {
-      if (ignore) return;
-      setRequests(data);
-      setLoadState('success');
-    }).catch((error) => {
-      if (ignore) return;
-      setErrorMessage(error instanceof Error ? error.message : 'เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ');
-      setLoadState('error');
-    });
+    setLoadState('loading');
+    setErrorMessage('');
+    setNotice('');
 
-    return () => { ignore = true; };
+    getRequests({ scenario })
+      .then((data) => {
+        setRequests(data);
+        setLoadState('success');
+      })
+      .catch((error) => {
+        setErrorMessage(error instanceof Error ? error.message : 'เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ');
+        setLoadState('error');
+      });
+
+    // TODO 5B: เพิ่ม cleanup guard เพื่อกัน stale update
   }, [scenario, reloadKey]);
 
   const summary = useMemo(() => ({
     total: requests.length,
 
-    pending: requests.filter((request) => request.status === 'completed').length,
+    pending: requests.filter((request) => request.status === 'pending').length,
     inProgress: requests.filter((request) => request.status === 'in-progress').length,
     completed: requests.filter((request) => request.status === 'completed').length,
   }), [requests]);
 
   const filteredRequests = statusFilter === 'all'
     ? requests
-
-    : requests.filter((request) => request.status !== statusFilter);
+    : requests.filter((request) => request.status === statusFilter);
 
   function handleRetry() {
     if (scenario) setSearchParams({});
@@ -60,24 +59,17 @@ function DashboardPage() {
   }
 
   async function handleDelete(requestId) {
-    try {
-      const nextRequests = await deleteRequest(requestId);
-      setRequests(requests);
-      setNotice(`ลบคำร้อง ${requestId} แล้ว`);
-    } catch (error) {
-      setNotice(error instanceof Error ? error.message : 'ลบคำร้องไม่สำเร็จ');
-    }
+    const next = await deleteRequest(requestId);
+    setRequests(next);
+    setNotice(`ลบคำร้อง ${requestId} แล้ว`);
   }
 
   async function handleReset() {
-    if (!window.confirm('ต้องการคืนข้อมูลตัวอย่างเริ่มต้นหรือไม่?')) return;
-    try {
-      setRequests(resetRequests());
-      setStatusFilter('all');
-      setNotice('คืนข้อมูลตัวอย่างเริ่มต้นแล้ว');
-    } catch (error) {
-      setNotice(error instanceof Error ? error.message : 'คืนข้อมูลไม่สำเร็จ');
-    }
+    if (!window.confirm('คืนค่าข้อมูลตัวอย่างเริ่มต้น และลบคำร้องที่เพิ่มไว้ทั้งหมด?')) return;
+    const seedRequests = await resetRequests();
+    setRequests(seedRequests);
+    setStatusFilter('all');
+    setNotice('คืนค่าข้อมูลตัวอย่างเรียบร้อยแล้ว');
   }
 
   return (
