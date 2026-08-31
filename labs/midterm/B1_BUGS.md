@@ -32,7 +32,7 @@
 
 | # | อาการ (ให้มาแล้ว) | ไฟล์ : บรรทัด | สาเหตุ (ทำไมผิด) | แก้อย่างไร |
 |---|---|---|---|---|
-| 1 | Console เตือนสีเหลืองเรื่องรายการ (list) | RequestList.jsx : 8-9 | ใน RequestCard ไม่มี key  | ส่ key={request.id} ใน RequestCard |
+| 1 | Console เตือนสีเหลืองเรื่องรายการ (list) | RequestList.jsx : 8-9 | ใน RequestCard ไม่มี key  | ใส่ key={request.id} ใน RequestCard |
 | 2 | ตัวเลข "รอดำเนินการ" ในแผงสรุปไม่ตรงกับที่เห็นจริง | DashboardPage : 54-55 | บรรทัด 54-55 เกิดจากการตั้ง request.status !== statusFilter  | บรรทัด 54-55 เเก้โโดยการตั้งการเปรียบเทียบจาก request.status !== statusFilter เป็น request.status === statusFilter); |
 | 3 | กดตัวกรอง "รอดำเนินการ" แล้วได้รายการที่ไม่ใช่ | ashboardPage : 47  | บรรทัด 47 filler ถูกตั้งเป็น completed ซึ่งซ้ำกับบรรทัด 49 ไปเเล้ว | บรรทัด 47 เเก้โดยการเปลี่ยนจาก completed เป็น pending |
 | 4 | เปลี่ยน URL `REQ-001` → `REQ-002` แล้วข้อมูลไม่เปลี่ยน | RequestDetailPage : 16-31 | เกิดจากการใส่ if ingore ใน .then เเละ .catch ถ้าเกิด ignore เป็น true ก็จะถูก return กลับทันทีทำให้ไม่ reload ตอนเปลี่ยน url  | ลบโค้ดที่เกี่ยวกับ ignore ให้หมดหรือเงื่อนไขเเละเพิ่ม   setErrorMessage(''); ด้วย |

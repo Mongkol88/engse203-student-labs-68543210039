@@ -15,44 +15,59 @@ function DashboardPage() {
   const [loadState, setLoadState] = useState('idle');
   const [requests, setRequests] = useState([]);
   const [statusFilter, setStatusFilter] = useState('all');
+  
   // TODO B2: เพิ่ม state สำหรับข้อความค้นหา ที่นี่
-  const [search, setSearchQuery] = useState('');
+  const [search, setSearch] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [notice, setNotice] = useState('');
 
   useEffect(() => {
-    setLoadState('loading');
-    setErrorMessage('');
-    setNotice('');
-
+    let ignore = false; 
+    
     setLoadState('loading');
     setErrorMessage('');
     setNotice('');
 
     getRequests({ scenario })
       .then((data) => {
-        setRequests(data);
-        setLoadState('success');
+        if (!ignore) {
+          setRequests(data);
+          setLoadState('success');
+        }
       })
       .catch((error) => {
-        setErrorMessage(error instanceof Error ? error.message : 'เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ');
-        setLoadState('error');
+        if (!ignore) {
+          setErrorMessage(error instanceof Error ? error.message : 'เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ');
+          setLoadState('error');
+        }
       });
 
-    // TODO 5B: เพิ่ม cleanup guard เพื่อกัน stale update
+    return () => {
+      ignore = true;
+    };
   }, [scenario, reloadKey]);
 
   const summary = useMemo(() => ({
     total: requests.length,
-
     pending: requests.filter((request) => request.status === 'pending').length,
     inProgress: requests.filter((request) => request.status === 'in-progress').length,
     completed: requests.filter((request) => request.status === 'completed').length,
   }), [requests]);
 
-  const filteredRequests = statusFilter === 'all'
-    ? requests
-    : requests.filter((request) => request.status === statusFilter);
+  const filteredRequests = useMemo(() => {
+    const query = search.trim().toLowerCase();
+
+    return requests.filter((request) => {
+      const matchStatus = statusFilter === 'all' || request.status === statusFilter;
+      
+      const matchSearch =
+        query === '' ||
+        request.requesterName?.toLowerCase().includes(query) ||
+        request.details?.toLowerCase().includes(query);
+      
+      return matchStatus && matchSearch;
+    });
+  }, [requests, statusFilter, search]);
 
   function handleRetry() {
     if (scenario) setSearchParams({});
@@ -75,6 +90,7 @@ function DashboardPage() {
       const seedRequests = await resetRequests();
       setRequests(seedRequests);
       setStatusFilter('all');
+      setSearch('');
       setNotice('คืนข้อมูลตัวอย่างเริ่มต้นแล้ว');
     } catch (error) {
       setNotice(error instanceof Error ? error.message : 'คืนข้อมูลไม่สำเร็จ');
@@ -84,25 +100,45 @@ function DashboardPage() {
   return (
     <section data-testid="page-dashboard">
       <div className="page-heading">
-        <div><p className="eyebrow dark">ROUTED + PERSISTENT</p><h1>Dashboard</h1><p>ติดตามคำร้องจาก URL, Service Layer และ browser storage</p></div>
-        <button className="button secondary" data-testid="reset-button" type="button" onClick={handleReset}>Reset Demo Data</button>
+        <div>
+          <p className="eyebrow dark">ROUTED + PERSISTENT</p>
+          <h1>Dashboard</h1>
+          <p>ติดตามคำร้องจาก URL, Service Layer และ browser storage</p>
+        </div>
+        <button className="button secondary" data-testid="reset-button" type="button" onClick={handleReset}>
+          Reset Demo Data
+        </button>
       </div>
+
       {scenario && <p className="lab-scenario" role="status">LAB test scenario: {scenario}</p>}
       {notice && <p className="notice" role="status">{notice}</p>}
       {loadState === 'loading' && <LoadingState />}
       {loadState === 'error' && <ErrorState message={errorMessage} onRetry={handleRetry} />}
+
       {loadState === 'success' && requests.length === 0 && (
         <section className="state-card" data-testid="empty-state">
-          <h2>ยังไม่มีคำร้อง</h2><p>เริ่มสร้างคำร้องแรกของคุณได้เลย</p><Link className="button primary inline" to="/requests/new">สร้างคำร้องใหม่</Link>
+          <h2>ยังไม่มีคำร้อง</h2>
+          <p>เริ่มสร้างคำร้องแรกของคุณได้เลย</p>
+          <Link className="button primary inline" to="/requests/new">
+            สร้างคำร้องใหม่
+          </Link>
         </section>
       )}
+
       {loadState === 'success' && requests.length > 0 && (
         <>
           <SummaryPanel summary={summary} />
           <section className="panel" aria-labelledby="request-list-title">
-            <div className="section-heading"><h2 id="request-list-title">รายการคำร้อง</h2><FilterBar value={statusFilter} onFilterChange={setStatusFilter} /></div>
-            {/* TODO B2: วางช่อง <input> ค้นหา ตรงนี้ (เหนือรายการ) แล้วกรองร่วมกับตัวกรองสถานะ */}
-            <input type='search'/>
+            <div className="section-heading">
+              <h2 id="request-list-title">รายการคำร้อง</h2>
+              <FilterBar value={statusFilter} onFilterChange={setStatusFilter} />
+            </div>
+            <input
+              type="search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="search-input"
+            />
             {/* TODO B3: เพิ่ม onMarkDone={handleMarkDone} และเขียน handleMarkDone ให้เรียก updateRequestStatus แล้ว setRequests เพื่อให้ summary อัปเดต + รอด refresh */}
             <RequestList requests={filteredRequests} onDeleteRequest={handleDelete} />
           </section>
