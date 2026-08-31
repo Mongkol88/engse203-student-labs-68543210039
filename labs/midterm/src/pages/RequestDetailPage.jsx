@@ -41,6 +41,13 @@ function RequestDetailPage() {
         <article className="panel detail-card">
           <h2>{request.requestType}</h2>
           <dl><div><dt>ID</dt><dd>{request.id}</dd></div><div><dt>ผู้แจ้ง</dt><dd>{request.requesterName}</dd></div><div><dt>สถานที่</dt><dd>{request.location}</dd></div><div><dt>รายละเอียด</dt><dd>{request.details}</dd></div><div><dt>ความเร่งด่วน</dt><dd>{request.priority}</dd></div><div><dt>สถานะ</dt><dd>{request.status}</dd></div></dl>
+
+          {request.status !== 'completed' && (
+            <button className="button primary" type="button">
+              ทำเสร็จ
+            </button>
+          )}
+
           <Link to="/">กลับ Dashboard</Link>
         </article>
       )}
