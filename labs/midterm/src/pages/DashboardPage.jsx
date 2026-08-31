@@ -59,17 +59,25 @@ function DashboardPage() {
   }
 
   async function handleDelete(requestId) {
-    const next = await deleteRequest(requestId);
-    setRequests(next);
-    setNotice(`ลบคำร้อง ${requestId} แล้ว`);
+    try {
+      const nextRequests = await deleteRequest(requestId);
+      setRequests(nextRequests);
+      setNotice(`ลบคำร้อง ${requestId} แล้ว`);
+    } catch (error) {
+      setNotice(error instanceof Error ? error.message : 'ลบคำร้องไม่สำเร็จ');
+    }
   }
 
   async function handleReset() {
-    if (!window.confirm('คืนค่าข้อมูลตัวอย่างเริ่มต้น และลบคำร้องที่เพิ่มไว้ทั้งหมด?')) return;
-    const seedRequests = await resetRequests();
-    setRequests(seedRequests);
-    setStatusFilter('all');
-    setNotice('คืนค่าข้อมูลตัวอย่างเรียบร้อยแล้ว');
+    if (!window.confirm('ต้องการคืนข้อมูลตัวอย่างเริ่มต้นหรือไม่?')) return;
+    try {
+      const seedRequests = await resetRequests();
+      setRequests(seedRequests);
+      setStatusFilter('all');
+      setNotice('คืนข้อมูลตัวอย่างเริ่มต้นแล้ว');
+    } catch (error) {
+      setNotice(error instanceof Error ? error.message : 'คืนข้อมูลไม่สำเร็จ');
+    }
   }
 
   return (
