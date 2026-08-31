@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import  PriorityBadge  from '../components/PriorityBadge.jsx';
 
 function RequestCard({ request, onDeleteRequest }) {
   return (
@@ -9,7 +10,7 @@ function RequestCard({ request, onDeleteRequest }) {
         <p>{request.location}</p>
         <p>{request.details}</p>
         {/* TODO B4: แทน {request.priority} ด้านล่างด้วย <PriorityBadge priority={request.priority} /> ที่คุณสร้าง */}
-        <p><span className={`badge ${request.status}`}>{request.status}</span> · {request.priority}</p>
+        <PriorityBadge priority={request.priority} /> 
       </div>
       <button className="button danger" type="button" onClick={() => onDeleteRequest(request.id)} aria-label={`ลบคำร้อง ${request.id}`}>
         ลบ

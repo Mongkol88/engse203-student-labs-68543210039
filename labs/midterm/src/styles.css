@@ -46,6 +46,8 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
 .badge.pending { color:#7a4700; background:#fff0cc; }
 .badge.in-progress { color:#075e68; background:#dff6f5; }
 .badge.completed { color:#176b45; background:#dff4e8; }
+.badge.normal { color:#0f3a5d; background:#e3edf9; }
+.badge.urgent { color:#8b2d1d; background:#ffe1dc; }
 .state-card { text-align:center; padding:clamp(1.4rem,5vw,3rem); }
 .state-card h1,.state-card h2 { margin-top:.25rem; }
 .error-state { border-color:#f4b4ae; }
