@@ -22,6 +22,8 @@ router.post('/', validateRequest, controller.createRequest);
 
 router.get('/:id', controller.getRequest);
 
+router.put('/:id', controller.updateRequestStatus)
+
 router.delete('/:id', controller.deleteRequest);
 
 
