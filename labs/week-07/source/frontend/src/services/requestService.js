@@ -52,9 +52,12 @@ export async function addRequest(requestInput) {
  * body: { status }
  */
 export async function updateRequestStatus(requestId, status) {
-  throw new Error('TODO W07-F6: updateRequestStatus');
+  await apiFetch(`/api/requests/${encodeURIComponent(requestId)}`, {
+    method: 'PUT',
+    body: JSON.stringify({ status }),
+  });
+  return getRequests();
 }
-
 /**
  * TODO W07-F7 (CP11) · DELETE /api/requests/:id
  * - ลบเสร็จแล้วคืน "รายการล่าสุดจากเซิร์ฟเวอร์" (เรียก getRequests() ต่อ)

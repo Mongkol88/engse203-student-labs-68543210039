@@ -1,3 +1,5 @@
+import { AppError } from "./errorHandler.js";
+
 const REQUEST_TYPES = ['แจ้งซ่อม', 'บริการบัญชีผู้ใช้', 'ขอใช้อุปกรณ์', 'อื่น ๆ'];
 const PRIORITIES = ['normal', 'urgent'];
 
@@ -11,7 +13,7 @@ export function validateRequest(req, res, next) {
   const errors = [];
 
   if (!input || typeof input !== 'object') {
-    return res.status(400).json({ error: 'ต้องส่งข้อมูลคำร้องมาด้วย' });
+    throw new AppError(`ต้องส่งข้อมูลคำร้องมาด้วย` , 400);
   }
   if (readText(input.requesterName).length < 2) errors.push('ชื่อผู้แจ้งต้องมีอย่างน้อย 2 ตัวอักษร');
   if (!REQUEST_TYPES.includes(input.requestType)) errors.push('ประเภทคำร้องไม่ถูกต้อง');
@@ -20,7 +22,7 @@ export function validateRequest(req, res, next) {
   if (!PRIORITIES.includes(input.priority)) errors.push('ความเร่งด่วนต้องเป็น normal หรือ urgent');
 
   if (errors.length > 0) {
-    return res.status(400).json({ error: 'ข้อมูลคำร้องไม่ถูกต้อง', details: errors });
+    throw new AppError(`ข้อมูลคำร้องไม่ถูกต้อง  ${errors}` , 400); `ไม่พบคำร้องรหัส ${req.params.id}`
   }
   next();
 }

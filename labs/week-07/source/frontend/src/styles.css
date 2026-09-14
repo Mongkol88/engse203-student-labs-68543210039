@@ -33,12 +33,14 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
 .button { border:1px solid transparent; border-radius:.6rem; padding:.62rem .82rem; font-weight:800; cursor:pointer; }
 .button.primary,.filter-active { color:white; background:var(--blue); }
 .button.secondary { color:var(--navy); border-color:var(--border); background:#eef4fb; }
-.button.danger { align-self:start; color:var(--danger); background:#feeceb; }
+.button.danger { color:var(--danger); background:#feeceb; }
+.button.change { color:var(--navy); border-color:var(--border); background:#eef4fb; }
 .button.inline { display:inline-block; text-decoration:none; }
 .filter-bar { display:flex; flex-wrap:wrap; gap:.4rem; }
 .filter-button { border:1px solid var(--border); border-radius:.6rem; padding:.55rem .7rem; color:var(--navy); background:#eef4fb; }
 .request-list { display:grid; gap:.7rem; margin-top:1rem; }
 .request-card { display:flex; flex-direction:column; gap:.8rem; padding:1rem; border:1px solid var(--border); border-radius:.75rem; background:#f9fbfe; overflow-wrap:anywhere; }
+.request-card-actions { display:flex; justify-content:flex-end; align-items:center; gap:.5rem; }
 .request-card h3 { margin:.15rem 0; }
 .request-card p { margin:.2rem 0; color:var(--muted); }
 .request-id { font-weight:800; }
@@ -62,6 +64,7 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
 .site-footer { padding:1rem 0; color:#dbe9f8; background:var(--navy); }
 .subtle-empty { color:var(--muted); padding:1rem; }
 :focus-visible { outline:3px solid #f39c12; outline-offset:3px; }
-@media (min-width:42rem) { .header-inner,.page-heading { flex-direction:row; align-items:center; } .header-inner { justify-content:space-between; } .request-card { flex-direction:row; justify-content:space-between; } }
+@media (min-width:42rem) { .header-inner,.page-heading { flex-direction:row; align-items:center; } .header-inner { justify-content:space-between; } .request-card { flex-direction:row; justify-content:space-between; } .request-card-actions { flex-direction:column; justify-content:space-between; align-items:flex-end; } }
 @media (min-width:52rem) { .summary-grid { grid-template-columns:repeat(4,minmax(0,1fr)); } .section-heading { flex-direction:row; justify-content:space-between; align-items:center; } }
 @media (prefers-reduced-motion:reduce) { .spinner { animation:none; } }
+
