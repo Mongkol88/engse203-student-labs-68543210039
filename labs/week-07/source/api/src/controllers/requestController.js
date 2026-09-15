@@ -42,3 +42,8 @@ export function deleteRequest(req, res) {
   }
   res.status(204).end();
 }
+
+export async function resetRequests(req, res) {
+  const resetData = await service.loadSeed();
+  res.status(200).json(resetData);
+}

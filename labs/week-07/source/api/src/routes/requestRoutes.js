@@ -10,6 +10,7 @@ const router = Router();
 // route เจาะจงต้องมาก่อน route ที่มี :id เสมอ
 router.get('/', asyncHandler(controller.listRequests));
 router.post('/', validateRequest , asyncHandler(controller.createRequest));
+router.post('/reset', asyncHandler(controller.resetRequests));
 router.get('/:id', asyncHandler(controller.getRequest));
 router.put('/:id', asyncHandler(controller.updateRequestStatus));
 router.delete('/:id', asyncHandler(controller.deleteRequest));
