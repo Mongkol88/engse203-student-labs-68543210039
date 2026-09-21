@@ -1,4 +1,5 @@
 import * as service from '../services/requestService.js';
+import * as userservice from '../services/usersService.js';
 
 /** controller รู้จัก req/res และตัดสิน status code — แต่ไม่จัดการข้อมูลเอง */
 
@@ -40,3 +41,25 @@ export function deleteRequest(req, res) {
   }
   res.status(204).end();
 }
+
+export function listUsers(req, res) {
+  const { status } = req.query;
+  res.status(200).json(userservice.findAll({ status }));
+}
+
+export function getUsers(req, res) {
+  const found = userservice.findById(req.params.id);
+  if (!found) {
+    return res.status(404).json({ error: `ไม่พบผู้ใช้ ${req.params.id}` });
+  }
+  res.status(200).json(found);
+}
+
+export function getRequestByUser(req, res) {
+  const found = userservice.findRequestById(req.params.id);
+  if (!found) {
+    return res.status(404).json({ error: `ไม่พบผู้ใช้ ${req.params.id}` });
+  }
+  res.status(200).json(found);
+}
+

@@ -60,10 +60,11 @@ export function findById(id) {
 
 export function create(input) {
   const id = nextId();
-  db.prepare(
-    `INSERT INTO requests (id, requester_id, request_type, location, details, priority)
-     VALUES (?, ?, ?, ?, ?, ?)`
-  ).run(
+  db.exec('BEGIN');
+  try {
+    const requesterId = resolveUserId(input.requesterName.trim());
+    db.prepare(`INSERT INTO requests (id, requester_id, request_type, location, details, priority)
+     VALUES (?, ?, ?, ?, ?, ?)`).run(
     id,
     resolveUserId(input.requesterName.trim()),
     input.requestType,
@@ -71,6 +72,11 @@ export function create(input) {
     input.details.trim(),
     input.priority ?? 'normal'
   );
+    db.exec('COMMIT');
+  } catch (err) {
+    db.exec('ROLLBACK');
+    throw err;
+  }
   return findById(id);   
 }
 
