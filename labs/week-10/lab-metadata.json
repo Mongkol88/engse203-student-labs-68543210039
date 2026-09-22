@@ -1,0 +1,11 @@
+{
+  "week": "week-10",
+  "title": "node-database",
+  "status": "submitted",
+  "originalRepoUrl": "https://github.com/Mongkol88/engse203-student-labs-68543210039/tree/lab/week-10/labs/week-10",
+  "originalCommit": "3b362b623e48fb0a4514abb6a9020a33b12662da",
+  "pullRequestUrl": "https://github.com/Mongkol88/engse203-student-labs-68543210039/pull/9",
+  "submissionTag": "lab-10-submission-v1",
+  "testStatus": "pass",
+  "notes": "Static site ต้องมี index.html ที่ publish root"
+}

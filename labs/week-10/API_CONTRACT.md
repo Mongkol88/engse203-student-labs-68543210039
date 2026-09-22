@@ -25,6 +25,42 @@
 
 ---
 
+## โครงสร้างฐานข้อมูล (Data Model / Schema)
+
+ระบบจัดเก็บข้อมูลลงฐานข้อมูล SQLite (`api/data/requests.db`) โดยมีโครงสร้าง Schema ตามไฟล์ `api/data/schema.sql` ดังนี้
+
+### 1. ตาราง `users` (ผู้ใช้งาน)
+
+| คอลัมน์ (Column) | ชนิดข้อมูล (Type) | ข้อจำกัด (Constraints) | คำอธิบาย |
+|---|---|---|---|
+| `id` | `INTEGER` | `PRIMARY KEY AUTOINCREMENT` | รหัสผู้ใช้ (รันอัตโนมัติ) |
+| `name` | `TEXT` | `NOT NULL` | ชื่อ-นามสกุลผู้ใช้งาน |
+| `department` | `TEXT` | `NOT NULL` | แผนก/สาขาวิชา |
+| `email` | `TEXT` | `NOT NULL UNIQUE` | อีเมล (ห้ามซ้ำ) |
+
+### 2. ตาราง `requests` (คำร้องขอรับบริการ)
+
+| คอลัมน์ (Column) | ชนิดข้อมูล (Type) | ข้อจำกัด (Constraints) | คำอธิบาย |
+|---|---|---|---|
+| `id` | `TEXT` | `PRIMARY KEY` | รหัสคำร้อง เช่น `"REQ-001"` |
+| `requester_id` | `INTEGER` | `NOT NULL`, `FOREIGN KEY REFERENCES users(id)` | รหัสผู้แจ้ง (เชื่อมโยงกับตาราง `users`) |
+| `request_type` | `TEXT` | `NOT NULL`, `CHECK IN ('แจ้งซ่อม','บริการบัญชีผู้ใช้','ขอใช้อุปกรณ์','อื่น ๆ')` | ประเภทคำร้อง |
+| `location` | `TEXT` | `NOT NULL` | สถานที่เกิดปัญหา |
+| `details` | `TEXT` | `NOT NULL` | รายละเอียดคำร้อง |
+| `priority` | `TEXT` | `NOT NULL DEFAULT 'normal'`, `CHECK IN ('normal','urgent')` | ความสำคัญ |
+| `status` | `TEXT` | `NOT NULL DEFAULT 'pending'`, `CHECK IN ('pending','in-progress','completed')` | สถานะคำร้อง |
+| `created_at` | `TEXT` | `NOT NULL DEFAULT (datetime('now','localtime'))` | วันเวลาที่สร้างข้อมูล |
+
+### ความสัมพันธ์ระหว่างตาราง (Entity Relationship)
+- **One-to-Many (1:N):** ผู้ใช้ 1 คน (`users`) สามารถสร้างคำร้อง (`requests`) ได้หลายรายการ โดยเชื่อมโยงผ่าน `requests.requester_id = users.id`
+- มีการเปิด `PRAGMA foreign_keys = ON;` เพื่อรักษาความถูกต้องของข้อมูล (Referential Integrity)
+
+### ดัชนี (Indexes)
+- `idx_requests_status`: สำหรับเร่งความเร็วในการค้นหา/กรองตาม `status` (`requests(status)`)
+- `idx_requests_requester`: สำหรับเร่งความเร็วในการ JOIN และค้นหาตามผู้แจ้ง (`requests(requester_id)`)
+
+---
+
 ## Endpoints
 
 | Method | Endpoint | คำอธิบาย | Request body | สำเร็จ | ผิดพลาด |
