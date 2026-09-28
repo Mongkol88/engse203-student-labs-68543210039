@@ -6,6 +6,9 @@
     "node": ">=22.13.0"
   },
   "scripts": {
+    "build:client": "npm install --prefix frontend && npm run build --prefix frontend",
+    "build:server": "npm install",
+    "build": "npm run build:api && npm run build:frontend",
     "check": "node --disable-warning=ExperimentalWarning check-week11.mjs"
   },
   "devDependencies": {
