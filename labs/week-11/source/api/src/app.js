@@ -36,8 +36,6 @@ export function createApp() {
   app.use('/api/users', userRoutes);
 
 
-
-
   // ⑥ ปิดท้าย
   app.use(notFound);
   app.use(errorHandler);

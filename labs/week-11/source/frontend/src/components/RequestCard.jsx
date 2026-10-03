@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 
-function RequestCard({ request, onDeleteRequest }) {
+function RequestCard({ request, onDeleteRequest,  onChangeStatus}) {
+  const isCompleted = request.status === 'completed';
+  const SetStatus = (request.status === 'pending') ? "in-progress" : "completed";
   return (
     <article className="request-card">
       <div>
@@ -10,9 +12,16 @@ function RequestCard({ request, onDeleteRequest }) {
         <p>{request.details}</p>
         <p><span className={`badge ${request.status}`}>{request.status}</span> · {request.priority}</p>
       </div>
-      <button className="button danger" type="button" onClick={() => onDeleteRequest(request.id)} aria-label={`ลบคำร้อง ${request.id}`}>
-        ลบ
-      </button>
+      <div className="request-card-actions">
+        <button className="button danger" type="button" onClick={() => onDeleteRequest(request.id)} aria-label={`ลบคำร้อง ${request.id}`}>
+          ลบ
+        </button>
+        {!isCompleted && (
+          <button className="button change" type="button" onClick={() => onChangeStatus(request, SetStatus)}>
+            เปลี่ยนสถานะ
+          </button> 
+        )}
+      </div>
     </article>
   );
 }
