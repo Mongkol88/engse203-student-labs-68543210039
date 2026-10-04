@@ -136,10 +136,10 @@
   },
   {
     "week": "week-11",
-    "title": "Full-Stack System Integration & Production Readiness",
+    "title": "Full-Stack Integration",
     "status": "submitted",
     "originalRepoUrl": "https://github.com/Mongkol88/engse203-student-labs-68543210039/tree/lab/week-11/labs/week-11",
-    "originalCommit": "a7502349e590e37c4355776a4bc46eea0aa297d5",
+    "originalCommit": "3375514b591ef905ded58228de3a8b8ce3571fa8",
     "pullRequestUrl": "https://github.com/Mongkol88/engse203-student-labs-68543210039/pull/11",
     "submissionTag": "lab-11-submission-v1",
     "testStatus": "pass",
