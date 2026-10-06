@@ -81,8 +81,21 @@ describe('validateRequestInput — ข้อมูลผิดรูปแบบ
     expect(validateRequestInput({})).toHaveLength(5);
   });
 
-  test.each(['เเจ้งซ่อม, ขอใช้ห้อง, บริการบัญชีผู้ใช้']), (requestType) => {
-    expect(validateRequestInput(requestType)).toEqual([]);
-  };
+  test.each(['แจ้งซ่อม', 'บริการบัญชีผู้ใช้', 'ขอใช้อุปกรณ์', 'อื่น ๆ'])('ประเภท "%s" → ผ่าน', (requestType) => {
+    expect(validateRequestInput(withField({ requestType }))).toEqual([]);
+  });
+
+  test('ประเภทคำร้องนอกรายการ → error', () => {
+    expect(validateRequestInput(withField({ requestType: 'แจ้งเหตุ' }))).toHaveLength(1);
+  });
+
+  test.each(['normal', 'urgent'])('ความเร่งด่วน "%s" → ผ่าน', (priority) => {
+    expect(validateRequestInput(withField({ priority }))).toEqual([]);
+  });
+
+  test('ความเร่งด่วน high → error', () => {
+    expect(validateRequestInput(withField({ priority: 'high' }))).toHaveLength(1);
+  });
 });
+
 
