@@ -30,10 +30,14 @@ async function parseError(response) {
  * - ต่อ API ไม่ได้เลย → โยน ApiError status 0
  */
 export async function apiFetch(path, options = {}) {
+  const token = localStorage.getItem('token');
+
   let response;
   try {
     response = await fetch(`${BASE_URL}${path}`, {
-      headers: { 'Content-Type': 'application/json', ...options.headers },
+      headers: { 'Content-Type': 'application/json', 
+      ...(token ? { Authorization: `Bearer ${token}` } : {}), 
+      ...options.headers },
       ...options,
     });
   } catch {
