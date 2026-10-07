@@ -7,7 +7,6 @@
   "pullRequestUrl": "https://github.com/Mongkol88/engse203-student-labs-68543210039/pull/13",
   "submissionTag": "lab-13-submission-v1",
   "testStatus": "pass",
-  "notes": "Static site ต้องมี index.html ที่ publish rootm"
+  "notes": "Live Demo บน Render: https://campus-service-week13-68543210039-2.onrender.com/",
+  "resultUrl": "https://campus-service-week13-68543210039-2.onrender.com/"
 }
-
-
