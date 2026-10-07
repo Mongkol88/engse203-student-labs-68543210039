@@ -123,6 +123,20 @@ describe('เส้นทางที่ไม่มีอยู่', () => {
   });
 });
 
+describe('GET / และ GET /api', () => {
+  test('GET /api คืนข้อความและ version', async () => {
+    const r = await request(app).get('/api');
+    expect(r.status).toBe(200);
+    expect(r.body).toHaveProperty('version');
+  });
+  test('GET / คืนข้อความแนะนำ', async () => {
+    const r = await request(app).get('/');
+    expect(r.status).toBe(200);
+    expect(r.body).toHaveProperty('api', '/api');
+  });
+});
+
+
 describe('ข้อมูลผิดรูปแบบและ endpoint ผู้ใช้', () => {
   test('ส่ง JSON ที่เสีย → 400 เป็น JSON ไม่ใช่ 500', async () => {
     const r = await request(app).post('/api/requests')
